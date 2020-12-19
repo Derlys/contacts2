@@ -6,7 +6,20 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
-    children: [],
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'contacts',
+      },
+      {
+        path: 'contacts',
+        loadChildren: () =>
+          import('./pages/contact-list/contact-list.module').then(
+            (m) => m.ContactListModule
+          ),
+      },
+    ],
   },
 ];
 
