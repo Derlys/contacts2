@@ -20,7 +20,7 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'contacts/:id',
+        path: 'contacts/:contactId',
         loadChildren: () =>
           import('./pages/contact-detail/contact-detail.module').then(
             (m) => m.ContactDetailModule
