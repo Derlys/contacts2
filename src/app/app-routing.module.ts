@@ -28,6 +28,7 @@ const routes: Routes = [
       },
     ],
   },
+  { path: 'contact-create', loadChildren: () => import('./pages/contact-create/contact-create.module').then(m => m.ContactCreateModule) },
 ];
 
 @NgModule({
