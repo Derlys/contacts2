@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -23,6 +18,7 @@ export class ContactCreateComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  // tslint:disable-next-line:typedef
   public submit() {
     // Use the form value to do authentication
     console.log(this.form.value);

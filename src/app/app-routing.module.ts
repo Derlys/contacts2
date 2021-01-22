@@ -5,13 +5,13 @@ import { LayoutComponent } from './ui/layout/layout.component';
 const routes: Routes = [
   {
     path: '',
+    pathMatch: 'full',
+    redirectTo: 'contacts',
+  },
+  {
+    path: '',
     component: LayoutComponent,
     children: [
-      {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: 'contacts',
-      },
       {
         path: 'contacts',
         loadChildren: () =>
@@ -26,9 +26,15 @@ const routes: Routes = [
             (m) => m.ContactDetailModule
           ),
       },
+      {
+        path: 'contact-create',
+        loadChildren: () =>
+          import('./pages/contact-create/contact-create.module').then(
+            (m) => m.ContactCreateModule
+          ),
+      },
     ],
   },
-  { path: 'contact-create', loadChildren: () => import('./pages/contact-create/contact-create.module').then(m => m.ContactCreateModule) },
 ];
 
 @NgModule({
