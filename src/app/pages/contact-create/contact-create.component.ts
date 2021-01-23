@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ContactService } from '../../data/services/contact.service';
 
 @Component({
   selector: 'app-contact-create',
@@ -14,7 +15,10 @@ export class ContactCreateComponent implements OnInit {
     email: new FormControl(''),
   });
 
-  constructor(private readonly router: Router) {}
+  constructor(
+    private readonly router: Router,
+    private readonly service: ContactService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -22,6 +26,11 @@ export class ContactCreateComponent implements OnInit {
   public submit() {
     // Use the form value to do authentication
     console.log(this.form.value);
+    this.service.addContact(
+      this.form.value.name,
+      this.form.value.phone,
+      this.form.value.email
+    );
     // Navigate after successful login
     return this.router.navigate(['/']);
   }

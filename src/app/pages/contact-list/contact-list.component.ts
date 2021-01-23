@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ContactService } from '../../services/contact.service';
+import { ContactService } from '../../data/services/contact.service';
 
 @Component({
   selector: 'app-contact-list',
@@ -7,7 +7,7 @@ import { ContactService } from '../../services/contact.service';
   styleUrls: ['./contact-list.component.scss'],
 })
 export class ContactListComponent implements OnInit {
-  contacts$ = this.service.contacts$();
+  contacts$ = this.service.contacts$;
   constructor(private readonly service: ContactService) {}
 
   ngOnInit(): void {}
