@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, from, Observable, of } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import { Contact } from '../contact';
-import { switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -46,6 +45,11 @@ export class ContactService {
     };
     // actualizar la lista de contactos
     this.contactsSubject.next([...contacts, contact]);
+  }
+  loadContact(id: string) {
+    return of(
+      this.contactsSubject.getValue().find((contact) => contact.id === id)
+    );
   }
 
   constructor() {}
