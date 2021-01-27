@@ -35,6 +35,13 @@ const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'contact-create-label',
+    loadChildren: () =>
+      import('./pages/contact-create-label/contact-create-label.module').then(
+        (m) => m.ContactCreateLabelModule
+      ),
+  },
 ];
 
 @NgModule({
