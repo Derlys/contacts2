@@ -1,37 +1,13 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, of } from 'rxjs';
+import { BehaviorSubject, from, Observable, of } from 'rxjs';
 import { Contact } from '../contact';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ContactService {
-  contactsSubject = new BehaviorSubject<Contact[]>([
-    {
-      id: 'virginia',
-      name: 'virginia dominguez',
-      phone: 3012790300,
-      email: 'derlys@gmail.com',
-    },
-    {
-      id: 'Derlys',
-      name: 'Derlys dominguez',
-      phone: 3012790300,
-      email: 'derlys@gmail.com',
-    },
-    {
-      id: 'David',
-      name: 'David dominguez',
-      phone: 3012790300,
-      email: 'derlys@gmail.com',
-    },
-    {
-      id: 'Beeman',
-      name: 'Beeman dominguez',
-      phone: 3012790300,
-      email: 'derlys@gmail.com',
-    },
-  ]);
+  contactsSubject = new BehaviorSubject<Contact[]>([]);
   contacts$ = this.contactsSubject.asObservable();
   addContact(name: string, phone: number, email: string): void {
     // solicitar lista de contactos
@@ -45,6 +21,7 @@ export class ContactService {
     };
     // actualizar la lista de contactos
     this.contactsSubject.next([...contacts, contact]);
+    localStorage.setItem('contacts', JSON.stringify([...contacts, contact]));
   }
   loadContact(id: string) {
     return of(
@@ -52,5 +29,11 @@ export class ContactService {
     );
   }
 
-  constructor() {}
+  constructor() {
+    const contacts = localStorage.getItem('contacts');
+    if (contacts) {
+      const parsed = JSON.parse(contacts);
+      this.contactsSubject.next(parsed);
+    }
+  }
 }
